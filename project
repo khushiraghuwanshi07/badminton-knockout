@@ -1,0 +1,148 @@
+# ==========================================
+#       BADMINTON PLAYER SCORE SYSTEM
+# ==========================================
+
+print("==========================================")
+print("       BADMINTON SCORE CALCULATOR")
+print("==========================================")
+
+# Number of players
+number_of_players = int(input("\nEnter number of players: "))
+
+# Dictionary to store player information
+players = {}
+
+# Taking player names
+for i in range(number_of_players):
+    name = input(f"Enter Player {i + 1} name: ")
+
+    players[name] = {
+        "wins": 0,
+        "losses": 0,
+        "points": 0
+    }
+
+
+# Number of matches
+number_of_matches = int(input("\nEnter number of matches played: "))
+
+
+# Enter match results
+for match in range(number_of_matches):
+
+    print("\n==========================================")
+    print(f"              MATCH {match + 1}")
+    print("==========================================")
+
+    player1 = input("Enter first player's name: ")
+    player2 = input("Enter second player's name: ")
+
+    # Check whether players exist
+    if player1 not in players or player2 not in players:
+        print("Player name not found!")
+        continue
+
+    print("\nEnter game scores")
+
+    # Game 1
+    score1 = int(input(f"{player1} - Game 1 score: "))
+    score2 = int(input(f"{player2} - Game 1 score: "))
+
+    if score1 > score2:
+        game1_winner = player1
+    else:
+        game1_winner = player2
+
+    # Game 2
+    score3 = int(input(f"{player1} - Game 2 score: "))
+    score4 = int(input(f"{player2} - Game 2 score: "))
+
+    if score3 > score4:
+        game2_winner = player1
+    else:
+        game2_winner = player2
+
+    # Count games won
+    player1_games = 0
+    player2_games = 0
+
+    if game1_winner == player1:
+        player1_games += 1
+    else:
+        player2_games += 1
+
+    if game2_winner == player1:
+        player1_games += 1
+    else:
+        player2_games += 1
+
+    # Game 3 only if required
+    if player1_games == 1 and player2_games == 1:
+
+        print("\nBoth players have won one game.")
+        print("Game 3 is required.")
+
+        score5 = int(input(f"{player1} - Game 3 score: "))
+        score6 = int(input(f"{player2} - Game 3 score: "))
+
+        if score5 > score6:
+            player1_games += 1
+        else:
+            player2_games += 1
+
+    # Find match winner
+    if player1_games > player2_games:
+        winner = player1
+        loser = player2
+    else:
+        winner = player2
+        loser = player1
+
+    # Update player records
+    players[winner]["wins"] += 1
+    players[winner]["points"] += 2
+
+    players[loser]["losses"] += 1
+
+    print("\n------------------------------------------")
+    print("MATCH RESULT")
+    print("------------------------------------------")
+
+    print(f"{player1}: {player1_games} games")
+    print(f"{player2}: {player2_games} games")
+
+    print(f"\nWinner: {winner}")
+
+
+# ==========================================
+#       FINAL TOURNAMENT RESULT
+# ==========================================
+
+print("\n\n==========================================")
+print("          TOURNAMENT RESULTS")
+print("==========================================")
+
+for name, data in players.items():
+
+    print(f"\nPlayer: {name}")
+    print(f"Wins: {data['wins']}")
+    print(f"Losses: {data['losses']}")
+    print(f"Points: {data['points']}")
+
+
+# Find player with most wins
+winner = max(
+    players,
+    key=lambda name: players[name]["wins"]
+)
+
+
+print("\n==========================================")
+print("           🏆 TOURNAMENT WINNER")
+print("==========================================")
+
+print(f"\n🏆 Winner: {winner}")
+print(f"Total Wins: {players[winner]['wins']}")
+print(f"Total Points: {players[winner]['points']}")
+
+print("\n==========================================")
