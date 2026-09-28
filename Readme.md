@@ -81,7 +81,7 @@ badminton-knockout/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/badminton-knockout.git
+git clone https://github.com/khushiraghuwanshi07/badminton-knockout.git
 ```
 
 ### 2. Open the project folder
